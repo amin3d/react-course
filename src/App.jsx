@@ -1,24 +1,27 @@
-import { Fragment, useState } from "react";
-import { FirstComponent } from "./components";
+import React, { Fragment } from "react";
+import { ThemeProvider } from "@mui/material";
+import muiTheme from "./common/mui-theme";
+import CssBaseline from "@mui/material/CssBaseline";
+import rtlPlugin from "stylis-plugin-rtl";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
+import { prefixer } from "stylis";
+import { Login } from "./pages";
+
+const cacheRtl = createCache({
+	key: "muirtl",
+	stylisPlugins: [prefixer, rtlPlugin],
+});
 
 function App() {
-	const [counter, setCounter] = useState(0);
-
-	const onClick = () => {
-		setCounter(prevCounter => prevCounter + 1);
-	};
-
 	return (
 		<Fragment>
-			<FirstComponent content="Salam Donya!" onClick={onClick} />
-			<FirstComponent content="Hello World!" onClick={onClick} />
-			<p>counter: {counter}</p>
-			{/* <FirstComponent content="Salam Donya!" onClick={onClick} />
-			<FirstComponent content="Test">
-				<p>
-					This is a <BoldText text="COMPOSITION" />!
-				</p>
-			</FirstComponent> */}
+			<ThemeProvider theme={muiTheme}>
+				<CacheProvider value={cacheRtl}>
+					<CssBaseline />
+					<Login />
+				</CacheProvider>
+			</ThemeProvider>
 		</Fragment>
 	);
 }
