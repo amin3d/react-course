@@ -32,11 +32,11 @@ const Dashboard = () => {
 		if (text) {
 			add({ id: _uniqueId(), text });
 			notifTextRef.current.value = "";
-			notifTextRef.current.focus();
 			setHasError(false);
 		} else {
 			setHasError(true);
 		}
+		notifTextRef.current.focus();
 	};
 
 	const onChangeNotification = event => {
