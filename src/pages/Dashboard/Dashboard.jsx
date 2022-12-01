@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -14,9 +14,11 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { NotificationContext } from "../../context";
 import { NotificationList } from "../../components";
+import _uniqueId from "lodash/uniqueId";
 
 const Dashboard = () => {
 	const [todos, getTodos] = useTodos();
+	const [hasError, setHasError] = useState(false);
 
 	useEffect(() => {
 		getTodos();
@@ -26,7 +28,24 @@ const Dashboard = () => {
 	const notifTextRef = useRef();
 
 	const onAddNotification = () => {
-		add(notifTextRef.current.value);
+		const text = notifTextRef.current.value;
+		if (text) {
+			add({ id: _uniqueId(), text });
+			notifTextRef.current.value = "";
+			notifTextRef.current.focus();
+			setHasError(false);
+		} else {
+			setHasError(true);
+		}
+	};
+
+	const onChangeNotification = event => {
+		const text = event.target.value;
+		if (text) {
+			setHasError(false);
+		} else {
+			setHasError(true);
+		}
 	};
 
 	return (
@@ -49,6 +68,7 @@ const Dashboard = () => {
 											variant="outlined"
 											size="small"
 											sx={{ mr: 2 }}
+											onChange={onChangeNotification}
 										/>
 										<Button
 											color="success"
@@ -57,6 +77,18 @@ const Dashboard = () => {
 										>
 											افزودن اعلان
 										</Button>
+										{hasError && (
+											<Typography
+												sx={{
+													fontSize: 12,
+													marginTop: 1,
+												}}
+												color="red"
+												gutterBottom
+											>
+												{"متن اعلان را وارد کنید."}
+											</Typography>
+										)}
 									</Grid>
 									<Grid item xs={12}>
 										<NotificationList />
