@@ -5,6 +5,7 @@ const NotificationContext = createContext({
 	unreadCount: 0,
 	add: notif => {},
 	read: () => {},
+	remove: () => {},
 });
 
 export default NotificationContext;

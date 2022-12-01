@@ -1,5 +1,6 @@
 import { useState } from "react";
 import NotificationContext from "./context";
+import _filter from "lodash/filter";
 
 const NotificationContextProvider = ({ children }) => {
 	const [items, setItems] = useState([]);
@@ -14,11 +15,16 @@ const NotificationContextProvider = ({ children }) => {
 		setUnreadCount(0);
 	};
 
+	const remove = notif => {
+		setItems(prevItems => [..._filter(prevItems, item => item !== notif)]);
+	};
+
 	const context = {
 		items,
 		unreadCount,
 		add,
 		read,
+		remove,
 	};
 
 	return (
