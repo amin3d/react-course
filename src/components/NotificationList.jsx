@@ -15,38 +15,36 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 const NotificationList = () => {
 	const { items, remove } = useContext(NotificationContext);
 
-	const onDelete = item => {
-		remove(item);
+	const onDelete = id => {
+		remove(id);
 	};
 
 	return (
-		<div>
-			{!_isEmpty(items) && (
-				<List
-					sx={{
-						width: "100%",
-						maxWidth: 360,
-						bgcolor: "background.paper",
-						mt: 2,
-					}}
-				>
-					{_map(items, (item, key) => (
-						<ListItem key={key}>
-							<ListItemAvatar>
-								<Avatar>
-									<NotificationsNoneIcon />
-								</Avatar>
-							</ListItemAvatar>
-							<ListItemText primary={item} />
-							<Divider variant="middle" />
-							<IconButton onClick={() => onDelete(item)}>
-								<DeleteOutlineIcon />
-							</IconButton>
-						</ListItem>
-					))}
-				</List>
-			)}
-		</div>
+		!_isEmpty(items) && (
+			<List
+				sx={{
+					width: "100%",
+					maxWidth: 360,
+					bgcolor: "background.paper",
+					mt: 2,
+				}}
+			>
+				{_map(items, ({ id, text }, key) => (
+					<ListItem key={key}>
+						<ListItemAvatar>
+							<Avatar>
+								<NotificationsNoneIcon />
+							</Avatar>
+						</ListItemAvatar>
+						<ListItemText primary={text} />
+						<Divider variant="middle" />
+						<IconButton onClick={() => onDelete(id)}>
+							<DeleteOutlineIcon />
+						</IconButton>
+					</ListItem>
+				))}
+			</List>
+		)
 	);
 };
 

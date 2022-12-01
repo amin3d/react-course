@@ -15,8 +15,10 @@ const NotificationContextProvider = ({ children }) => {
 		setUnreadCount(0);
 	};
 
-	const remove = notif => {
-		setItems(prevItems => [..._filter(prevItems, item => item !== notif)]);
+	const remove = notifId => {
+		setItems(prevItems => [
+			..._filter(prevItems, item => item.id !== notifId),
+		]);
 	};
 
 	const context = {
