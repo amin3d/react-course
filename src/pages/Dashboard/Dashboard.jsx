@@ -65,7 +65,7 @@ const Dashboard = () => {
 							</Grid>
 							<Grid item xs={6}>
 								{_map(todos, ({ id, title, completed }) => (
-									<Card sx={{ mb: 1 }}>
+									<Card sx={{ mb: 1 }} key={id}>
 										<CardContent>
 											<Box
 												display="flex"
