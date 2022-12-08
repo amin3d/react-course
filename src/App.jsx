@@ -9,8 +9,9 @@ import createCache from "@emotion/cache";
 import { prefixer } from "stylis";
 import { NotificationProvider } from "./context";
 import { Route, Routes } from "react-router-dom";
-import { Admin, Dashboard } from "./pages/admin";
+import { Admin, Dashboard, SingleTodo, Todos } from "./pages/admin";
 import { Login, Register } from "./pages/auth";
+import { PATHS } from "./routes";
 
 const cacheRtl = createCache({
 	key: "muirtl",
@@ -25,20 +26,21 @@ function App() {
 					<CssBaseline />
 					<NotificationProvider>
 						<Routes>
-							<Route path="/" element={<Admin />}>
+							<Route path={PATHS.ROOT} element={<Admin />}>
 								<Route index element={<Dashboard />} />
-								{/* <Route
-									path="add-product"
-									element={<AddEditProduct />}
-								>
+								<Route path={PATHS.TODOS}>
+									<Route index element={<Todos />} />
 									<Route
-										path=":id"
-										element={<AddEditProduct />}
+										path={PATHS.SINGLE_TODO}
+										element={<SingleTodo />}
 									/>
-								</Route> */}
+								</Route>
 							</Route>
-							<Route path="/login" element={<Login />} />
-							<Route path="/register" element={<Register />} />
+							<Route path={PATHS.LOGIN} element={<Login />} />
+							<Route
+								path={PATHS.REGISTER}
+								element={<Register />}
+							/>
 							{/* <Route path="*" element={<NotFound />} /> */}
 						</Routes>
 					</NotificationProvider>
