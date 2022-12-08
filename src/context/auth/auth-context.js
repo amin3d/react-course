@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext({
 	isLoggedIn: false,
@@ -8,6 +9,7 @@ const AuthContext = createContext({
 
 export const AuthContextProvider = ({ children }) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const isUserLoggedIn = localStorage.getItem("isLoggedIn");
@@ -21,11 +23,13 @@ export const AuthContextProvider = ({ children }) => {
 		console.log(user, pass);
 		localStorage.setItem("isLoggedIn", "1");
 		setIsLoggedIn(true);
+		navigate("/");
 	};
 
 	const logoutHandler = () => {
 		localStorage.removeItem("isLoggedIn");
 		setIsLoggedIn(false);
+		navigate("/login");
 	};
 
 	return (
