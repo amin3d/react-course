@@ -22,7 +22,6 @@ const Login = () => {
 		} else if (_isEmpty(password)) {
 			passwordRef.current.focus();
 		} else {
-			console.log("here...");
 			onLogin(username, password);
 		}
 	};
