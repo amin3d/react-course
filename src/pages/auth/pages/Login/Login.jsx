@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { AuthContext } from "../../context";
+import { AuthContext } from "../../../../context";
 import _isEmpty from "lodash/isEmpty";
 
 const Login = () => {
