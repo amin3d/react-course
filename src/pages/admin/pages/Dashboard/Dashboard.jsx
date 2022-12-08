@@ -1,25 +1,21 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import _map from "lodash/map";
-import CheckIcon from "@mui/icons-material/Check";
-import CloseIcon from "@mui/icons-material/Close";
 import { useTodos } from "../../../../hooks";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { NotificationContext } from "../../../../context";
-import { NotificationList } from "../../../../components";
+import { NotificationList, TodoList } from "../../../../components";
 import _uniqueId from "lodash/uniqueId";
+import { Link } from "react-router-dom";
+import { PATHS } from "../../../../routes";
 
 const Dashboard = () => {
 	const [todos, getTodos] = useTodos();
 	const [hasError, setHasError] = useState(false);
 
 	useEffect(() => {
-		getTodos();
+		getTodos(1);
 	}, [getTodos]);
 
 	const { add } = useContext(NotificationContext);
@@ -85,35 +81,8 @@ const Dashboard = () => {
 				</Grid>
 			</Grid>
 			<Grid item xs={6}>
-				{_map(todos, ({ id, title, completed }) => (
-					<Card sx={{ mb: 1 }} key={id}>
-						<CardContent>
-							<Box
-								display="flex"
-								justifyContent="flex-start"
-								alignItems="center"
-							>
-								<Box display="flex" mr={1}>
-									{completed ? (
-										<CheckIcon color="success" />
-									) : (
-										<CloseIcon color="error" />
-									)}
-								</Box>
-								<Typography
-									sx={{
-										fontSize: 16,
-										marginBottom: 0,
-									}}
-									color="slategray"
-									gutterBottom
-								>
-									{title}
-								</Typography>
-							</Box>
-						</CardContent>
-					</Card>
-				))}
+				<TodoList items={todos} />
+				<Link to={PATHS.TODOS}>{"لیست"}</Link>
 			</Grid>
 		</Grid>
 	);
