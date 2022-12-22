@@ -7,15 +7,15 @@ const useTodos = () => {
 	const getTodos = useCallback(
 		async userId => {
 			const url = userId
-				? `https://jsonplaceholder.typicode.com/todos?userId=${userId}`
-				: `https://jsonplaceholder.typicode.com/todos`;
+				? `https://dummyjson.com/todos/user/${userId}`
+				: `https://dummyjson.com/todos`;
 
 			await getData(url);
 		},
 		[getData]
 	);
 
-	return [response, getTodos];
+	return [response.todos, getTodos];
 };
 
 export default useTodos;
