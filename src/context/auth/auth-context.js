@@ -17,8 +17,10 @@ export const AuthContextProvider = ({ children }) => {
 
 		if (isUserLoggedIn === "1") {
 			setIsLoggedIn(true);
+		} else {
+			navigate(PATHS.LOGIN);
 		}
-	}, []);
+	}, [navigate]);
 
 	const loginHandler = (user, pass) => {
 		console.log(user, pass);
