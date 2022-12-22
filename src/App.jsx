@@ -44,12 +44,6 @@ function App() {
 							{/* <Route path="*" element={<NotFound />} /> */}
 						</Routes>
 					</NotificationProvider>
-					{/* {!isLoggedIn && <Login />}
-					{isLoggedIn && (
-						<NotificationProvider>
-							<Dashboard />
-						</NotificationProvider>
-					)} */}
 				</CacheProvider>
 			</ThemeProvider>
 		</Fragment>
