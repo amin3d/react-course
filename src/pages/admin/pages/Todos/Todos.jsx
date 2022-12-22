@@ -9,7 +9,7 @@ const Todos = () => {
 		getTodos();
 	}, [getTodos]);
 
-	return <TodoList items={todos} />;
+	return <TodoList items={todos} showDetailsLink />;
 };
 
 export default Todos;
